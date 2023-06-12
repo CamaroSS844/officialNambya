@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "officialNambya",
+    "slug": "officialNambya",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
