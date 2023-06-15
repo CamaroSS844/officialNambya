@@ -1,21 +1,42 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './components/Home';
+import HymnScreen from './components/HymnScreen';
+import { Provider, useSelector } from 'react-redux';
+import { store } from './components/redux/store';
+
+//MakerCulture17!
+const Stack = createNativeStackNavigator()
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+  
+  return(
+    <NavigationContainer>
+      <Provider store={store}>
+          <MyNavigator />
+      </Provider>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function MyNavigator(){
+  let background = useSelector(state => state.theme.value.homeHeaderBackground)
+  return (
+    <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: background
+            },
+            headerTintColor: '#e6e5e5'
+          }}
+          >
+            <Stack.Screen
+             name='HOME'
+             component={HomeScreen}
+             options={{headerShown: false}}
+             />
+            <Stack.Screen name='Hymn' component={HymnScreen} options={{headerShown: false, gestureEnabled: true}} />
+          </Stack.Navigator>
+  )
+}
