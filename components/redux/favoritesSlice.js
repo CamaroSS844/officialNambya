@@ -1,6 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { save } from "./secureStore";
+import { storeData, getData } from "./secureStore";
+import { favoriteslist } from "./secureStore";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const clear = async () => {
+  try {
+      await AsyncStorage.clear()
+  } catch (err){
+      console.log('error occurred')
+  }
+}
 
 
 const initialState = {
@@ -17,11 +27,11 @@ export const favoritesSlice = createSlice({
         ,
         toggleFavorites: (state = [], action) => {
               state.value = ToggleFavorites(state, action.payload);
-              // save('favorites', state.value);
+              storeData(favoriteslist, state.value)
           },
         clearAll: (state) => {
           state.value = []
-          // save('favorites', state.value);
+          clear();
         }
     }
 })
@@ -43,7 +53,6 @@ const ToggleFavorites = ( state, item) => {
     if (initialLength === arr.length) {
       arr = add(arr, item);
     }
-    // arr = Sort(arr);   reduce stored values
     return Sort(arr)
   };
 

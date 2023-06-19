@@ -6,9 +6,8 @@ import ListDisplay from "./HymnListScreen";
 import { FAB } from '@rneui/themed'
 import { FontAwesome5 } from "@expo/vector-icons";
 
-const iconcolor = '#0be0e0'
-const floatingcolor = '#210070'
-const deleted = <FontAwesome5 name="trash" size={25} color={iconcolor} />
+
+const deleted = <FontAwesome5 name="trash" size={25} color="#fff" />
 
 class FavoritesScreen extends React.Component{
     constructor(props){
@@ -18,7 +17,7 @@ class FavoritesScreen extends React.Component{
         return (
             <View style={{backgroundColor: this.props.theme.backgroundColor}}>
                 {this.props.list && this.props.list.length?
-                    <View style={{backgroundColor: this.props.theme.backgroundColor}}>
+                    <View style={{backgroundColor: this.props.theme.backgroundColor, height: '100%'}}>
                    <ListDisplay 
                     data={this.props.list}
                     navigation={this.props.navigation}
@@ -28,14 +27,14 @@ class FavoritesScreen extends React.Component{
                         visible={true}
                         size="large"
                         icon = {{name: 'delete', color: 'white'}}
-                        color={floatingcolor}
+                        color="red"
                         placement="right"
                         style={{ margin: 0, marginRight: 10 }}
                         onPress={() => this.props.clearAll()}
                     />
                 </View>
                  :
-                   <View style={{backgroundColor: this.props.theme.backgroundColor}}>
+                   <View style={{backgroundColor: this.props.theme.backgroundColor, height: '100%'}}>
                     <Text style={{fontStyle: 'italic', fontSize: 25, textAlign: 'center', color: this.props.theme.color}}>
                         No Favorites Added
                     </Text>

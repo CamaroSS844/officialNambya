@@ -1,12 +1,22 @@
 import React from "react";
-import { Text,
-    StyleSheet,
-    View,
-    Image,
-    StatusBar } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  View,
+  Image,
+  StatusBar,
+  TextInput,
+} from "react-native";
+import { connect } from "react-redux";
+import { getData } from "./redux/secureStore";
+import { initializeList } from "./redux/favoritesSlice";
+import { initializeSize } from "./redux/fontSlice";
+import { initializeTheme } from "./redux/themeSlice";
+import { theme, favoriteslist, fontsize } from "./redux/secureStore";
+import { Filter } from "./Search";
+import { FontAwesome5 } from "@expo/vector-icons";
 import { ContentData } from "./names";
 import HymnListScreen from './HymnListScreen'
-import { connect } from "react-redux";
 // import { AppLoading } from "expo-app-loading";
 // import {
 //   useFonts,
@@ -15,13 +25,37 @@ import { connect } from "react-redux";
 // } from "@expo-google-fonts/dev";
 
 
+const retrieve = async (initializeL, initializeS, initializeT) => {
+    let value = await getData(favoriteslist);
+    try {
+      
+      if (value) {
+        initializeL(value);
+      }
+    } catch (err) {
+      console.log("error occurred in retrieving list");
+    }
+  
+    value = await getData(fontsize);
+    try {
+      if (value) {
+        initializeS(value);
+      }
+    } catch (err) {
+      console.log("error occurred in retrieving fontsize");
+    }
+  };
+
 class HomeScreen extends React.Component {
-    constructor(props){
-        super(props)
-    }
-    state = {
-        toggleView: false
-    }
+    constructor(props) {
+    super(props);
+    this.state = {
+      hymnName: "",
+    };
+  }
+  state = {
+    toggleView: false,
+  };
     render(){
         // let [fontsLoaded] = useFonts({
         //     Inter_400Regular,
@@ -31,17 +65,77 @@ class HomeScreen extends React.Component {
         //   if (!fontsLoaded) {
         //     return <AppLoading />;
         //   } else {
+            retrieve(
+                this.props.initializeList,
+                this.props.initializeSize,
+                this.props.initializeTheme
+              );
             return (
             <View style={{backgroundColor: this.props.theme.backgroundColor}}>
                 <StatusBar backgroundColor={this.props.theme.statusbar} barStyle="light-content" />
-                <View style={{...styles.header, backgroundColor: this.props.theme.homeHeaderBackground}}>
-                    <Image source={require('./Assets/download.png')} style={styles.pic}/>
-                    <Text style={{...styles.paragraph}}>Methodist Church in Zimbabwe</Text>
-                    <Text style={{...styles.paragraph}}>Nambya Hymnal</Text>
-                </View>
+                <View
+          style={{
+            ...styles.header,
+            backgroundColor: this.props.theme.homeHeaderBackground,
+          }}
+        >
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View>
+              <Image
+                source={require("./Assets/download.png")}
+                style={styles.pic}
+              />
+            </View>
+            <View>
+              <Text
+                style={{
+                  ...styles.header1,
+                  fontWeight: "bold",
+                  color: "#e5e5e5",
+                }}
+              >
+                Methodist Church in Zimbabwe
+              </Text>
+              <Text style={{ ...styles.header2, color: "#e5e5e5" }}>
+                Ndebele Hymnal
+              </Text>
+            </View>
+          </View>
+          <View
+            style={{
+              ...styles.searchContainer,
+            }}
+          >
+            <TextInput
+              style={{
+                ...styles.searchBar,
+                color: "#fefefe",
+                backgroundColor: this.props.theme.textinput,
+                paddingLeft: 12,
+              }}
+              placeholder="Search"
+              placeholderTextColor={this.props.theme.placeholderColor}
+              editable={true}
+              cursorColor={"#fefefe"}
+              value={this.state.hymnName}
+              onChangeText={(hymnName) => this.setState({ hymnName })}
+            />
+            <FontAwesome5
+              size={18}
+              name={this.state.hymnName.length > 0? "times" :"search"}
+              onPress={() => this.state.hymnName.length > 0? this.setState({ hymnName : ''}) : null}
+              style={{
+                marginLeft: -25,
+                marginTop: 10,
+                marginRight: 10,
+                color: "#fefefeaa",
+              }}
+            />
+          </View>
+        </View>
 
-                <HymnListScreen data={ContentData} navigation={this.props.navigation}/>
-                
+        <Filter name={this.state.hymnName} navigation={this.props.navigation} />
+      
             </View>
         )
             // }
@@ -61,19 +155,37 @@ export default connect(
 
 const styles = StyleSheet.create({
     header: {
-        alignContent: 'center',
-        padding: 10
+      padding: 24,
+      paddingBottom: 15,
+      paddingTop: 10,
+    },
+    header1: {
+      fontSize: 16,
+      marginTop: 17,
+    },
+    header2: {
+      fontSize: 15,
+      marginTop: 5,
+    },
+    searchBar: {
+      width: "100%",
+      marginTop: 20,
+      marginBottom: 10,
+      marginLeft: "auto",
+      marginRight: "auto",
+      borderRadius: 5,
+      padding: 8,
+    },
+    searchContainer: {
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      height: 70,
     },
     pic: {
-        width: 95,
-        height: 95,
-        alignSelf: 'center'
+      height: 65,
+      width: 65,
+      marginTop: 0,
+      marginBottom: -20,
     },
-    paragraph: {
-        color: '#f7f7f7',
-        fontSize: 18,
-        textAlign: 'center',
-        fontWeight: 'bold',
-        margin: 5
-    }
-})
+  });
