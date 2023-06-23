@@ -5,6 +5,7 @@ import HomeScreen from './components/Home';
 import HymnScreen from './components/HymnScreen';
 import { Provider, useSelector } from 'react-redux';
 import { store } from './components/redux/store';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 //MakerCulture17!
 const Stack = createNativeStackNavigator()
@@ -12,11 +13,13 @@ const Stack = createNativeStackNavigator()
 export default function App() {
   
   return(
+    <GestureHandlerRootView style={{flex: 1}}>
     <NavigationContainer>
       <Provider store={store}>
           <MyNavigator />
       </Provider>
     </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
 

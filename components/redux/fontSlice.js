@@ -25,9 +25,15 @@ export const fontSlice = createSlice({
                 storeData(fontsize, state.value)
             }else null
         },
+        setFontSize: (state=20) => {
+            storeData(fontsize, state.value);
+        },
+        onSliderChange : (state=20, x) => {
+            state.value = parseInt(x.payload);
+        }
     }
 })
 
-export const { increment, decrement, initializeSize } = fontSlice.actions
+export const { increment, decrement, initializeSize, setFontSize, onSliderChange } = fontSlice.actions
 
 export default fontSlice.reducer

@@ -1,5 +1,5 @@
 import React from "react";
-import {
+import { 
   Text,
   FlatList,
   TouchableOpacity,
@@ -31,7 +31,8 @@ class RenderItem extends React.PureComponent {
             this.obj,
             this.key,
             this.props.list,
-            this.props.navigation
+            this.props.navigation,
+            this.name
           )
         }
       >
@@ -119,14 +120,14 @@ export function checkList(item, list = []) {
 }
 
 function toggleHeart(item, list) {
-  if (checkList(item, /*this.props.list*/ list)) return false; //return hearto
-  // return heart
-  return true;
+  if (checkList(item, /*this.props.list*/ list)) return true; //return heart meaning it is not in the list
+  // return hearto meaning it is in the list
+  return false;
 }
 
-function handlePress(obj, key, list, navigation) {
+function handlePress(obj, key, list, navigation, name) {
   //this.props.list list
-  navigation.push("Hymn", { id: key - 1, toggleHeart: toggleHeart(obj, list) });
+  navigation.push("Hymn", { id: key - 1, toggleHeart: toggleHeart(obj, list), hymnName: name });
 }
 
 const handleLongPress = (obj, favoritesScreen) => {

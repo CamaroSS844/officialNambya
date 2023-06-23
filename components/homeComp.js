@@ -9,14 +9,9 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { getData } from "./redux/secureStore";
-import { initializeList } from "./redux/favoritesSlice";
-import { initializeSize } from "./redux/fontSlice";
-import { initializeTheme } from "./redux/themeSlice";
-import { theme, favoriteslist, fontsize } from "./redux/secureStore";
+import { favoriteslist, fontsize } from "./redux/secureStore";
 import { Filter } from "./Search";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { ContentData } from "./names";
-import HymnListScreen from './HymnListScreen'
 // import { AppLoading } from "expo-app-loading";
 // import {
 //   useFonts,

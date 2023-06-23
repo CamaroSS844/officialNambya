@@ -16,7 +16,6 @@ export default function Hometab() {
   );
   let bcolor = useSelector((state) => state.theme.value.tabBackgroundcolor);
   let tabicon = useSelector((state) => state.theme.value.tabIcon);
-  let textTheme = useSelector((state) => state.theme.value.color)
 
   return (
     <Provider store={store}>
