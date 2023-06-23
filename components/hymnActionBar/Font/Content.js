@@ -29,7 +29,10 @@ import { toggleBSState } from "../../redux/toggleBSSlice";
 
     render(){
         return (
-                <Pressable onPress={null}>
+                <View >
+                <Pressable style={{width: "100%"}} hitSlop={15}>
+                  <Pressable  style={styles.Line} hitSlop={5}/>
+                </Pressable>
                 <View style={styles.divisons}>
                     <Text style={styles.divHead} >Line Spacing</Text>
                     <View style={styles.buttonContainer}>
@@ -87,7 +90,7 @@ import { toggleBSState } from "../../redux/toggleBSSlice";
                         </Pressable>
                     </ScrollView>  
                 </View>
-                </Pressable>
+                </View>
                 )
     }
 } 
