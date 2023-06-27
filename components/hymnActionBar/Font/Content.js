@@ -29,8 +29,8 @@ import { toggleBSState } from "../../redux/toggleBSSlice";
 
     render(){
         return (
-                <View >
-                <Pressable style={{width: "100%"}} hitSlop={15}>
+                <View style={styles.Container} >
+                <Pressable style={{width: "100%"}} hitSlop={30}>
                   <Pressable  style={styles.Line} hitSlop={5}/>
                 </Pressable>
                 <View style={styles.divisons}>
@@ -112,6 +112,13 @@ const mapStateToProps = (state) => ({
   export default connect(mapStateToProps, mapDispatchToProps())(Content);
 
   const styles = StyleSheet.create({
+    Container: {
+        backgroundColor: "#fff", 
+        padding: 30, 
+        paddingLeft: 20, 
+        paddingRight: 10,
+        borderRadius: 20
+    },
     buttonContainer: {
       display: "flex",
       flexDirection: "row", 
