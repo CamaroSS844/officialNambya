@@ -1,13 +1,15 @@
-import { View, StyleSheet, TextInput } from "react-native";
+import { View, StyleSheet, TextInput, Pressable } from "react-native";
 import React from "react";
 import { navToNewHymn } from "../HymnListScreen";
 import { ContentData } from "../names";
 import { connect}from 'react-redux';
 import { setKeypadVisibility } from "../redux/keypadSlice";
+import Combiner from "../hymns/Combiner";
 
 class KeypadScreen extends React.Component {
     constructor(props){
         super(props);
+        this.changeHymn = this.props.setState;
         this.state = {
             hymnName: ""
         }
@@ -17,7 +19,7 @@ class KeypadScreen extends React.Component {
       if (this.props.keypadVisibility){
 
         return ( 
-            <View style={styles.Container}> 
+            <Pressable style={styles.Container}> 
                 <TextInput
                   style={{
                     ...styles.searchBar,
@@ -33,23 +35,25 @@ class KeypadScreen extends React.Component {
                   inputMode={"numeric"}
                   value={this.state.hymnName}
                   onSubmitEditing= {() => {
-                    //if hymnnumber != " " run this code
-                    if (this.state.hymnName != " "){
-                      this.props.setKeypadVisibility()
-                      hymnNumber = parseInt(this.state.hymnName);
-                      navToNewHymn("Hymn", hymnNumber, this.props.list, this.props.navigation, ContentData[hymnNumber-1].name)
+                    hymnNumber = parseInt(this.state.hymnName);
+                    this.props.setKeypadVisibility();
+                    console.log(this.props.name);
+                    if (!isNaN(this.state.hymnName) && this.props.current != hymnNumber){
+                      hymnObj = ContentData[hymnNumber-1];
+                      navToNewHymn(hymnObj, hymnNumber, this.props.list, this.props.navigation, hymnObj.name)
+                      // this.changeHymn({hymn: Combiner(hymnNumber -1)});
+                      console.log(this.props.name);
                       this.setState({hymnName: ""});
-                  }
+                    }
                   }}
                   onChangeText={(hymnName) => {
                     lastChar = parseInt(hymnName.slice(-1));
-                    console.log(isNaN(lastChar));
                     if(!isNaN(lastChar)   || (hymnName == "")){
                       this.setState({ hymnName })
                     } else null
                   }}
                 />
-            </View>
+            </Pressable>
          );
       } else {
         return null

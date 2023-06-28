@@ -23,7 +23,7 @@ class RenderItem extends React.PureComponent {
       <TouchableOpacity
         style={{ color: this.props.theme.color, ...styles.Btn }}
         onLongPress={() =>{
-            toggleFavs = this.props.toggleFavorites
+          toggleFavs = this.props.toggleFavorites
           handleLongPress(this.obj, this.props.favoritesScreen)}
         }
         onPress={() =>

@@ -31,7 +31,8 @@ function MyNavigator(){
             headerStyle: {
               backgroundColor: background
             },
-            headerTintColor: '#e6e5e5'
+            headerTintColor: '#e6e5e5',
+            detachInactiveScreens: true
           }}
           >
             <Stack.Screen

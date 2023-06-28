@@ -26,10 +26,10 @@ export class HymnScreen extends React.Component{
     constructor(props){
         super(props)
         this.id = parseInt(this.props.route.params.id);
-        this.hymn = Combiner(this.id);
         this.iconColor = this.props.theme.tabIcon;
         this.name = this.props.route.params.hymnName;
         this.state = {
+            hymn: Combiner(this.id),
             toggleVisibility: false,
             inFavorites: !this.props.route.params.toggleHeart,
             toggleHeart: toggleHeartFunc(this.props.route.params.toggleHeart, this.props.theme.tabIcon)
@@ -55,7 +55,7 @@ export class HymnScreen extends React.Component{
                 , alignItems: "center", height: 90, maxWidth: "100%"
                 }}>
                 <View style={{display: "flex", flexDirection: "row"}}>
-                  <Pressable style={{marginLeft: 0, marginRight: "5%"}} onPress={() => this.props.navigation.pop()}>
+                  <Pressable style={{marginLeft: 0, marginRight: "5%"}} onPress={() => this.props.navigation.popToTop()}>
                     {back}
                   </Pressable>
                   <Text style={{fontSize: 20, 
@@ -73,11 +73,11 @@ export class HymnScreen extends React.Component{
               </View>
             <ScrollView>
                 <Text style={{fontSize: this.props.size, color: this.props.theme.color, lineHeight: this.props.lineSpacing}}>
-                  {this.hymn.song}
+                  {this.state.hymn.song}
                 </Text>
-                {this.hymn.additional? 
+                {this.state.hymn.additional? 
                   <Text style={{...styles.aditional, fontSize: this.props.size}}>
-                  {this.hymn.additional}
+                  {this.state.hymn.additional}
                   </Text>
                   : null
                 }
@@ -85,7 +85,7 @@ export class HymnScreen extends React.Component{
 
           {/*change FAB from one by rneui themed to one by react native paper*/}
           <ActionBar />
-          <KeypadScreen navigation={this.props.navigation}/>
+          <KeypadScreen navigation={this.props.navigation} setState={this.setState} current={this.id+1} name={this.state.hymn.name}/>
           <FAB
             visible={true}
             size="large"
