@@ -4,6 +4,7 @@ import fontReducer from './fontSlice'
 import linespaceSlice from "./linespaceSlice";
 import toggleBSSlice from "./toggleBSSlice";
 import  toggleTheme  from "./themeSlice";
+import keypadSlice from "./keypadSlice";
 
 export const store = configureStore({
     reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
         fontS: fontReducer,
         theme: toggleTheme,
         LineSpace: linespaceSlice,
-        toggleBS: toggleBSSlice
+        toggleBS: toggleBSSlice,
+        keypadS: keypadSlice
     }
 }) 
 

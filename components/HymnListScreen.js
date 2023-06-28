@@ -27,7 +27,7 @@ class RenderItem extends React.PureComponent {
           handleLongPress(this.obj, this.props.favoritesScreen)}
         }
         onPress={() =>
-          handlePress(
+          navToNewHymn(
             this.obj,
             this.key,
             this.props.list,
@@ -49,7 +49,7 @@ export class listDisplay extends React.PureComponent {
   }
 
   render() {
-    return (
+    return ( 
       <FlatList
         // ref={}
         data={this.props.data}
@@ -125,7 +125,7 @@ function toggleHeart(item, list) {
   return false;
 }
 
-function handlePress(obj, key, list, navigation, name) {
+export function navToNewHymn(obj, key, list, navigation, name) {
   //this.props.list list
   navigation.push("Hymn", { id: key - 1, toggleHeart: toggleHeart(obj, list), hymnName: name });
 }

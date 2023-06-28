@@ -113,6 +113,7 @@ class HomeScreen extends React.Component {
               editable={true}
               cursorColor={"#fefefe"}
               value={this.state.hymnName}
+              keyboardType={"visible-password"}
               onChangeText={(hymnName) => this.setState({ hymnName })}
             />
             <FontAwesome5

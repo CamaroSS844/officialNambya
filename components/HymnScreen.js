@@ -1,13 +1,15 @@
 import React from "react";
 import { Text, View, Pressable, ScrollView } from "react-native";
 import Combiner from "./hymns/Combiner";
-import { connect}from 'react-redux'
-import {toggleFavorites} from './redux/favoritesSlice'
-import {increment, decrement,} from './redux/fontSlice'
+import { connect}from 'react-redux';
+import {toggleFavorites} from './redux/favoritesSlice';
+import {increment, decrement,} from './redux/fontSlice';
+import { setKeypadVisibility } from "./redux/keypadSlice";
 import { FontAwesome,Ionicons } from "@expo/vector-icons";
-import { FAB } from '@rneui/themed'
+import { FAB } from '@rneui/themed';
 import { ContentData } from "./names";
 import ActionBar from "./hymnActionBar/actionBar";
+import KeypadScreen from "./hymnActionBar/keypadScreen";
 
 const floatingcolor = 'red';
 const back = <FontAwesome name="chevron-left" size={25} color={floatingcolor} />;
@@ -83,6 +85,7 @@ export class HymnScreen extends React.Component{
 
           {/*change FAB from one by rneui themed to one by react native paper*/}
           <ActionBar />
+          <KeypadScreen navigation={this.props.navigation}/>
           <FAB
             visible={true}
             size="large"
@@ -91,7 +94,7 @@ export class HymnScreen extends React.Component{
             placement="right"
             style={{ margin: 30, marginRight: 10, borderColor: "#fff", 
             borderWidth: 10, borderRadius: 40}}
-            onPress={() => this.ToggleMenuVisibility()}
+            onPress={() => this.props.setKeypadVisibility()}
           />
           </View>
         )
@@ -107,7 +110,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = () => ({
     toggleFavorites,
     increment,
-    decrement
+    decrement,
+    setKeypadVisibility
 });
 
 export default connect(

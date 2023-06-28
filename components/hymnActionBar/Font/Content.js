@@ -31,7 +31,7 @@ import { toggleBSState } from "../../redux/toggleBSSlice";
         return (
                 <View style={styles.Container} >
                 <Pressable style={{width: "100%"}} hitSlop={30}>
-                  <Pressable  style={styles.Line} hitSlop={5}/>
+                  <Pressable  style={styles.Line} hitSlop={30}/>
                 </Pressable>
                 <View style={styles.divisons}>
                     <Text style={styles.divHead} >Line Spacing</Text>
