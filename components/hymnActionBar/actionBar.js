@@ -22,7 +22,9 @@ class ActionBar extends React.Component{
         return (
             <View style={{...styles.bottomNav, 
                 backgroundColor: this.props.theme.tabBackgroundcolor}}>
-                <Pressable style={{paddingBottom: 3, paddingLeft: 25}}>
+                <Pressable style={{paddingBottom: 3, paddingLeft: 25}} onPress={() => {
+                    this.props.navigation.push("Edit Hymn", { id: this.props.id, hymnName: this.props.hymnName, hymnContent: this.props.hymnContent })
+                    }}>
                     {pen}
                 </Pressable>
                 <Pressable style={{paddingLeft: 20}} onPress={() => {

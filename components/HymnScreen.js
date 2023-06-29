@@ -12,7 +12,7 @@ import ActionBar from "./hymnActionBar/actionBar";
 import KeypadScreen from "./hymnActionBar/keypadScreen";
 
 const floatingcolor = 'red';
-const back = <FontAwesome name="chevron-left" size={25} color={floatingcolor} />;
+export const back = <FontAwesome name="chevron-left" size={25} color={floatingcolor} />;
 const keypad = <Ionicons name="keypad" size={23} color={"#fff"} />;
 
 function toggleHeartFunc(bool, color){
@@ -84,7 +84,7 @@ export class HymnScreen extends React.Component{
             </ScrollView>
 
           {/*change FAB from one by rneui themed to one by react native paper*/}
-          <ActionBar />
+          <ActionBar navigation={this.props.navigation}  id={this.id+1} hymnName={this.name} hymnContent={this.state.hymn.song}/>
           <KeypadScreen navigation={this.props.navigation} setState={this.setState} current={this.id+1} name={this.state.hymn.name}/>
           <FAB
             visible={true}

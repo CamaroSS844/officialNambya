@@ -19,7 +19,10 @@ class KeypadScreen extends React.Component {
       if (this.props.keypadVisibility){
 
         return ( 
-            <Pressable style={styles.Container}> 
+            <Pressable style={styles.Container} onPress={() => {
+              this.setState({hymnName: ""})
+              this.props.setKeypadVisibility()
+              }}> 
                 <TextInput
                   style={{
                     ...styles.searchBar,
@@ -37,12 +40,10 @@ class KeypadScreen extends React.Component {
                   onSubmitEditing= {() => {
                     hymnNumber = parseInt(this.state.hymnName);
                     this.props.setKeypadVisibility();
-                    console.log(this.props.name);
                     if (!isNaN(this.state.hymnName) && this.props.current != hymnNumber){
                       hymnObj = ContentData[hymnNumber-1];
                       navToNewHymn(hymnObj, hymnNumber, this.props.list, this.props.navigation, hymnObj.name)
                       // this.changeHymn({hymn: Combiner(hymnNumber -1)});
-                      console.log(this.props.name);
                       this.setState({hymnName: ""});
                     }
                   }}

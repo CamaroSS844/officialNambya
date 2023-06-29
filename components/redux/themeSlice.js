@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { StyleSheet } from "react-native";
 import { storeData, theme } from "./secureStore";
 
-let styles = StyleSheet.create({
+let styles = {
     light: {
       backgroundColor: '#FEFEFE',
       color: 'black',
@@ -28,7 +28,7 @@ let styles = StyleSheet.create({
       homeHeaderBackground: '#292828',
       appHeaderBackground: '#292828',
       textinput: '#383838'
-    }})
+    }}
 
 const initialState = {
     //true means dark mode is on
