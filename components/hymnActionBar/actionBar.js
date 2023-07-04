@@ -1,8 +1,9 @@
-import React from "react";
-import { StyleSheet, View, Pressable} from "react-native";
-import { connect }from 'react-redux';
+import "react-native-gesture-handler";
+import React, { useRef } from "react";
+import { StyleSheet, View, Pressable, useWindowDimensions} from "react-native";
 import { MaterialIcons, FontAwesome, FontAwesome5} from "@expo/vector-icons";
 import Font from "./Font/Font";
+import { useSelector, useDispatch } from "react-redux";
 import { toggleBSState } from "./../redux/toggleBSSlice";
 
 var iconcolor = 'grey';
@@ -12,23 +13,31 @@ const library = <MaterialIcons name="local-library" size={24} color={iconcolor} 
 
 
 
-class ActionBar extends React.Component{
-    constructor(props){
-        super(props);
-    }
-    render(){
-        if(!this.props.bottomShelfState){
+export default function ActionBar(props){
+    const dispatch = useDispatch();
+    let size  = useSelector(state =>  state.fontS.value)
+    let theme = useSelector( state =>  state.theme.value)
+    let bottomShelfState = useSelector( state =>  state.toggleBS.value)
+
+    const bottomSheetModalRef = useRef(null);
+    function handlePresentModal() {
+        bottomSheetModalRef.current?.present();
+        setTimeout(() => {
+            dispatch(toggleBSState());
+        }, 100);
+      }
+
+        if(!bottomShelfState){
 
         return (
             <View style={{...styles.bottomNav, 
-                backgroundColor: this.props.theme.tabBackgroundcolor}}>
+                backgroundColor: theme.tabBackgroundcolor}}>
                 <Pressable style={{paddingBottom: 3, paddingLeft: 25}} onPress={() => {
-                    this.props.navigation.push("Edit Hymn", { id: this.props.id, hymnName: this.props.hymnName, hymnContent: this.props.hymnContent })
+                    props.navigation.push("Edit Hymn", { id: props.id, hymnName: props.hymnName, hymnContent: props.hymnContent })
                     }}>
                     {pen}
                 </Pressable>
-                <Pressable style={{paddingLeft: 20}} onPress={() => {
-                    this.props.toggleBSState()}} >
+                <Pressable style={{paddingLeft: 20}} onPress={handlePresentModal} >
                   {font}
                 </Pressable>
                 <Pressable style={{paddingBottom: 4 ,paddingLeft: 20}}>
@@ -40,24 +49,7 @@ class ActionBar extends React.Component{
           return (<Font />);
         
     }
-}
 
-
-const mapStateToProps = state => ({
-    size: state.fontS.value,
-    theme: state.theme.value,
-    bottomShelfState: state.toggleBS.value
-})
-
-const mapDispatchToProps = () => ({
-    toggleBSState
-    
-})
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps()
-)(ActionBar)
 
  
 const styles = StyleSheet.create({

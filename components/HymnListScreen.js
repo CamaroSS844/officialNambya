@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  Pressable
 } from "react-native";
 import { connect } from "react-redux";
 import { clearAll, toggleFavorites } from "./redux/favoritesSlice";
@@ -51,7 +52,6 @@ export class listDisplay extends React.PureComponent {
   render() {
     return ( 
       <FlatList
-        // ref={}
         data={this.props.data}
         removeClippedSubviews={true}
         initialNumToRender={10}
@@ -75,6 +75,7 @@ export class listDisplay extends React.PureComponent {
           ...styles.list,
           backgroundColor: this.props.theme.backgroundColor,
           height: '100%',
+          width: "100%",
           paddingTop: 10,
         }}
       />

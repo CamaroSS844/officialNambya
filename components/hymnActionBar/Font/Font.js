@@ -3,7 +3,8 @@ import {
   StyleSheet,
   Pressable,
   Dimensions,
-  PanResponder, Animated
+  PanResponder, 
+  Animated,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleBSState } from "../../redux/toggleBSSlice";
@@ -19,11 +20,23 @@ const init = (SCREEN_HEIGHT / (1.8) ) / SCREEN_HEIGHT  * 100;
 
 
  export default function Font(){
+
     
     const dispatch = useDispatch()
     // let  toggleBState = useSelector(state => state.toggleBS.value)
+    const bottomSheetModalRef = useRef(null);
 
-    const pan = useRef(new Animated.ValueXY()).current;
+    const snapPoints = ["25%", "48%", "75%"];
+
+    const pan = useRef(new Animated.ValueXY({x: 0, y: 800})).current;
+    console.log(pan)
+
+    Animated.timing(pan, {
+      toValue: {x: 0, y: 0},
+      duration: 600,
+      useNativeDriver: false
+    }).start();
+
     const panResponder = useRef(
       PanResponder.create({
         onMoveShouldSetPanResponder: () => true,
@@ -33,16 +46,19 @@ const init = (SCREEN_HEIGHT / (1.8) ) / SCREEN_HEIGHT  * 100;
           const y = (pageY / SCREEN_HEIGHT) * 100;
           if(y < init){
             Animated.spring(pan, {
-              toValue: {x: 0, y: 0},
-              useNativeDriver: true,
+              toValue: {x: 0, y: 2},
+              useNativeDriver: false,
             }).start();
           }else{
             Animated.timing(pan, {
-              toValue: {x: 0, y: 5000},
-              duration: 1000,
-              useNativeDriver: true
+              toValue: {x: 0, y: 600},
+              duration: 600,
+              useNativeDriver: false
             }).start();
-            dispatch(toggleBSState())
+            setTimeout(() => {
+              dispatch(toggleBSState())
+            }, 500)
+            
           }
         },
       }),

@@ -6,6 +6,7 @@ import {
   Image,
   StatusBar,
   TextInput,
+  Pressable,
 } from "react-native";
 import { connect } from "react-redux";
 import { getData } from "./redux/secureStore";
@@ -68,7 +69,7 @@ class HomeScreen extends React.Component {
             return (
             <View style={{backgroundColor: this.props.theme.backgroundColor}}>
                 <StatusBar backgroundColor={this.props.theme.statusbar} barStyle="light-content" />
-                <View
+        <View
           style={{
             ...styles.header,
             backgroundColor: this.props.theme.homeHeaderBackground,
@@ -113,6 +114,7 @@ class HomeScreen extends React.Component {
               editable={true}
               cursorColor={"#fefefe"}
               value={this.state.hymnName}
+              disableFullscreenUI={true}
               keyboardType={"visible-password"}
               onChangeText={(hymnName) => this.setState({ hymnName })}
             />
