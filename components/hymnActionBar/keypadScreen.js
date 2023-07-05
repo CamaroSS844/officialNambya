@@ -1,15 +1,13 @@
-import { View, StyleSheet, TextInput, Pressable } from "react-native";
+import { StyleSheet, TextInput, Pressable } from "react-native";
 import React from "react";
 import { navToNewHymn } from "../HymnListScreen";
 import { ContentData } from "../names";
 import { connect}from 'react-redux';
 import { setKeypadVisibility } from "../redux/keypadSlice";
-import Combiner from "../hymns/Combiner";
 
 class KeypadScreen extends React.Component {
     constructor(props){
         super(props);
-        this.changeHymn = this.props.setState;
         this.state = {
             hymnName: ""
         }
@@ -43,7 +41,6 @@ class KeypadScreen extends React.Component {
                     if (!isNaN(this.state.hymnName) && this.props.current != hymnNumber){
                       hymnObj = ContentData[hymnNumber-1];
                       navToNewHymn(hymnObj, hymnNumber, this.props.list, this.props.navigation, hymnObj.name)
-                      // this.changeHymn({hymn: Combiner(hymnNumber -1)});
                       this.setState({hymnName: ""});
                     }
                   }}

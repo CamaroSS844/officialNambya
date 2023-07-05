@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "772558232411",
+    "project_id": "nambya-hymnbook",
+    "storage_bucket": "nambya-hymnbook.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:772558232411:android:58d0d0c8eaf0d77dc7987e",
+        "android_client_info": {
+          "package_name": "au.com.nambyaHymnBook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "772558232411-obgvvjeoi5h6fj9gmgq00ivf9316gea0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLuJ9nPY1X0oqeDj6ESu3fJ0EhQs8ipM4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "772558232411-obgvvjeoi5h6fj9gmgq00ivf9316gea0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

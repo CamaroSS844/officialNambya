@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, View, Pressable, ScrollView } from "react-native";
 import Combiner from "./hymns/Combiner";
-import { connect}from 'react-redux';
+import { useSelector, useDispatch}from 'react-redux';
 import {toggleFavorites} from './redux/favoritesSlice';
-import {increment, decrement,} from './redux/fontSlice';
 import { setKeypadVisibility } from "./redux/keypadSlice";
 import { FontAwesome,Ionicons } from "@expo/vector-icons";
 import { FAB } from '@rneui/themed';
@@ -22,70 +21,69 @@ function toggleHeartFunc(bool, color){
 
 
 
-export class HymnScreen extends React.Component{
-    constructor(props){
-        super(props)
-        this.id = parseInt(this.props.route.params.id);
-        this.iconColor = this.props.theme.tabIcon;
-        this.name = this.props.route.params.hymnName;
-        this.state = {
-            hymn: Combiner(this.id),
-            toggleVisibility: false,
-            inFavorites: !this.props.route.params.toggleHeart,
-            toggleHeart: toggleHeartFunc(this.props.route.params.toggleHeart, this.props.theme.tabIcon)
-        }
+export default function HymnScreen (props){
+  const dispatch = useDispatch();
+  let size= useSelector(state =>  state.fontS.value);
+  let theme = useSelector(state => state.theme.value);
+  let lineSpacing = useSelector(state => state.LineSpace.value);
+
+  id = parseInt(props.route.params.id);
+  iconColor = theme.tabIcon;
+  Name = props.route.params.hymnName;
+  const [hymn, setHymn] = useState(Combiner(id));
+  const [toggleVisibility, setToggleVisibility] = useState(false);
+  const [inFavorites, setInFavorites] = useState(!props.route.params.toggleHeart);
+  const [toggleHeart, setToggleHeart] = useState(toggleHeartFunc(props.route.params.toggleHeart, theme.tabIcon))
+
+
+    const toggle = (item) => {
+      dispatch(toggleFavorites(item));
+      setInFavorites(!inFavorites);
+      setToggleHeart(toggleHeartFunc(inFavorites, iconColor));
     }
 
-    toggle = (item) => {
-      this.props.toggleFavorites(item);
-      this.setState({inFavorites: !this.state.inFavorites});
-      this.setState({toggleHeart: toggleHeartFunc(this.state.inFavorites, this.iconColor)});
-    }
-
-    ToggleMenuVisibility = () => {
-      this.setState({ toggleVisibility: !this.state.toggleVisibility });
+    const ToggleMenuVisibility = () => {
+      setToggleVisibility(!toggleVisibility);
     };
 
-
-    render(){
         return (
-            <View style={{flex: 1, backgroundColor: this.props.theme.backgroundColor}}>
+            <View style={{flex: 1, backgroundColor: theme.backgroundColor}}>
               <View style={{
                 display: "flex", flexDirection: "row", justifyContent: "space-around"
                 , alignItems: "center", height: 90, maxWidth: "100%"
                 }}>
                 <View style={{display: "flex", flexDirection: "row"}}>
-                  <Pressable style={{marginLeft: 0, marginRight: "5%"}} onPress={() => this.props.navigation.popToTop()}>
+                  <Pressable style={{marginLeft: 0, marginRight: "5%"}} onPress={() => props.navigation.popToTop()}>
                     {back}
                   </Pressable>
                   <Text style={{fontSize: 20, 
-                    color: this.props.theme.color, marginLeft: "5%", marginRight: "5%"
+                    color: theme.color, marginLeft: "5%", marginRight: "5%"
                     }}>
-                    {this.id+1}  {(this.name.length > 10)? this.name.substring(0, 15) : this.name}...
+                    {id+1}  {(Name.length > 10)? Name.substring(0, 15) : Name}...
                   </Text>
                 </View>
                 <View style={{display: "flex", alignItems: "center", marginLeft: "5%", marginRight: "5%"}}>
-                    <Pressable onPress={() => this.toggle(ContentData[this.id])}>
-                      {this.state.toggleHeart}
+                    <Pressable onPress={() => toggle(ContentData[id])}>
+                      {toggleHeart}
                     </Pressable>
                   <Text>8.6.8.6</Text>
                 </View>
               </View>
             <ScrollView>
-                <Text style={{fontSize: this.props.size, color: this.props.theme.color, lineHeight: this.props.lineSpacing}}>
-                  {this.state.hymn.song}
+                <Text style={{fontSize: size, color: theme.color, lineHeight: lineSpacing}}>
+                  {hymn.song}
                 </Text>
-                {this.state.hymn.additional? 
-                  <Text style={{...styles.aditional, fontSize: this.props.size}}>
-                  {this.state.hymn.additional}
+                {hymn.additional? 
+                  <Text style={{...styles.aditional, fontSize: size}}>
+                  {hymn.additional}
                   </Text>
                   : null
                 }
             </ScrollView>
 
           {/*change FAB from one by rneui themed to one by react native paper*/}
-          <ActionBar navigation={this.props.navigation}  id={this.id+1} hymnName={this.name} hymnContent={this.state.hymn.song}/>
-          <KeypadScreen navigation={this.props.navigation} setState={this.setState} current={this.id+1} name={this.state.hymn.name}/>
+          <ActionBar navigation={props.navigation}  id={id+1} hymnName={Name} hymnContent={hymn.song}/>
+          <KeypadScreen navigation={props.navigation} current={id+1} name={hymn.Name}/>
           <FAB
             visible={true}
             size="large"
@@ -94,27 +92,10 @@ export class HymnScreen extends React.Component{
             placement="right"
             style={{ margin: 30, marginRight: 10, borderColor: "#fff", 
             borderWidth: 10, borderRadius: 40}}
-            onPress={() => this.props.setKeypadVisibility()}
+            onPress={() => dispatch(setKeypadVisibility())}
           />
           </View>
         )
     }
-}
 
-const mapStateToProps = state => ({
-    size: state.fontS.value,
-    theme: state.theme.value,
-    lineSpacing: state.LineSpace.value
-});
 
-const mapDispatchToProps = () => ({
-    toggleFavorites,
-    increment,
-    decrement,
-    setKeypadVisibility
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps()
-)(HymnScreen);
