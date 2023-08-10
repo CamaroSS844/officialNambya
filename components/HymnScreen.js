@@ -42,60 +42,56 @@ export default function HymnScreen (props){
       setToggleHeart(toggleHeartFunc(inFavorites, iconColor));
     }
 
-    const ToggleMenuVisibility = () => {
-      setToggleVisibility(!toggleVisibility);
-    };
-
-        return (
-            <View style={{flex: 1, backgroundColor: theme.backgroundColor}}>
-              <View style={{
-                display: "flex", flexDirection: "row", justifyContent: "space-around"
-                , alignItems: "center", height: 90, maxWidth: "100%"
+    return (
+        <View style={{flex: 1, backgroundColor: theme.backgroundColor}}>
+          <View style={{
+            display: "flex", flexDirection: "row", justifyContent: "space-around"
+            , alignItems: "center", height: 90, maxWidth: "100%"
+            }}>
+            <View style={{display: "flex", flexDirection: "row"}}>
+              <Pressable style={{marginLeft: 0, marginRight: "5%"}} onPress={() => props.navigation.popToTop()}>
+                {back}
+              </Pressable>
+              <Text style={{fontSize: 20, 
+                color: theme.color, marginLeft: "5%", marginRight: "5%"
                 }}>
-                <View style={{display: "flex", flexDirection: "row"}}>
-                  <Pressable style={{marginLeft: 0, marginRight: "5%"}} onPress={() => props.navigation.popToTop()}>
-                    {back}
-                  </Pressable>
-                  <Text style={{fontSize: 20, 
-                    color: theme.color, marginLeft: "5%", marginRight: "5%"
-                    }}>
-                    {id+1}  {(Name.length > 10)? Name.substring(0, 15) : Name}...
-                  </Text>
-                </View>
-                <View style={{display: "flex", alignItems: "center", marginLeft: "5%", marginRight: "5%"}}>
-                    <Pressable onPress={() => toggle(ContentData[id])}>
-                      {toggleHeart}
-                    </Pressable>
-                  <Text>8.6.8.6</Text>
-                </View>
-              </View>
-            <ScrollView>
-                <Text style={{fontSize: size, color: theme.color, lineHeight: lineSpacing}}>
-                  {hymn.song}
-                </Text>
-                {hymn.additional? 
-                  <Text style={{...styles.aditional, fontSize: size}}>
-                  {hymn.additional}
-                  </Text>
-                  : null
-                }
-            </ScrollView>
-
-          {/*change FAB from one by rneui themed to one by react native paper*/}
-          <ActionBar navigation={props.navigation}  id={id+1} hymnName={Name} hymnContent={hymn.song}/>
-          <KeypadScreen navigation={props.navigation} current={id+1} name={hymn.Name}/>
-          <FAB
-            visible={true}
-            size="large"
-            title={keypad}
-            color= {floatingcolor}
-            placement="right"
-            style={{ margin: 30, marginRight: 10, borderColor: "#fff", 
-            borderWidth: 10, borderRadius: 40}}
-            onPress={() => dispatch(setKeypadVisibility())}
-          />
+                {id+1}  {(Name.length > 10)? Name.substring(0, 15) : Name}...
+              </Text>
+            </View>
+            <View style={{display: "flex", alignItems: "center", marginLeft: "5%", marginRight: "5%"}}>
+                <Pressable onPress={() => toggle(ContentData[id])}>
+                  {toggleHeart}
+                </Pressable>
+              <Text>8.6.8.6</Text>
+            </View>
           </View>
-        )
+        <ScrollView>
+            <Text style={{fontSize: size, color: theme.color, lineHeight: lineSpacing}}>
+              {hymn.song}
+            </Text>
+            {hymn.additional? 
+              <Text style={{...styles.aditional, fontSize: size}}>
+              {hymn.additional}
+              </Text>
+              : null
+            }
+        </ScrollView>
+        
+      {/*change FAB from one by rneui themed to one by react native paper*/}
+      <ActionBar navigation={props.navigation}  id={id+1} hymnName={Name} hymnContent={hymn.song}/>
+      <KeypadScreen navigation={props.navigation} current={id+1} name={hymn.Name}/>
+      <FAB
+        visible={true}
+        size="large"
+        title={keypad}
+        color= {floatingcolor}
+        placement="right"
+        style={{ margin: 30, marginRight: 10, borderColor: "#fff", 
+        borderWidth: 10, borderRadius: 40}}
+        onPress={() => dispatch(setKeypadVisibility())}
+      />
+      </View>
+    )
     }
 
 

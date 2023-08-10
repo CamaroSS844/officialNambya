@@ -4,8 +4,7 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
-  Alert,
-  Pressable
+  Alert
 } from "react-native";
 import { connect } from "react-redux";
 import { clearAll, toggleFavorites } from "./redux/favoritesSlice";

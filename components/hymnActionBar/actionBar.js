@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
-import React, { useRef } from "react";
-import { StyleSheet, View, Pressable, useWindowDimensions} from "react-native";
-import { MaterialIcons, FontAwesome, FontAwesome5} from "@expo/vector-icons";
+import React from "react";
+import { StyleSheet, View, Pressable} from "react-native";
+import { Ionicons, FontAwesome, FontAwesome5} from "@expo/vector-icons";
 import Font from "./Font/Font";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleBSState } from "./../redux/toggleBSSlice";
@@ -9,19 +9,16 @@ import { toggleBSState } from "./../redux/toggleBSSlice";
 var iconcolor = 'grey';
 const font = <FontAwesome name="font" size={21} color={iconcolor} />;
 const pen = <FontAwesome5 name="pen" size={18} color={iconcolor} />;
-const library = <MaterialIcons name="local-library" size={24} color={iconcolor} />;
+const library = <Ionicons name={"library"} size={25} color={iconcolor} />;
 
 
 
 export default function ActionBar(props){
     const dispatch = useDispatch();
-    let size  = useSelector(state =>  state.fontS.value)
     let theme = useSelector( state =>  state.theme.value)
     let bottomShelfState = useSelector( state =>  state.toggleBS.value)
 
-    const bottomSheetModalRef = useRef(null);
     function handlePresentModal() {
-        bottomSheetModalRef.current?.present();
         setTimeout(() => {
             dispatch(toggleBSState());
         }, 100);

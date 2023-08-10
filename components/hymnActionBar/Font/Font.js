@@ -40,7 +40,13 @@ const init = (SCREEN_HEIGHT / (1.8) ) / SCREEN_HEIGHT  * 100;
     const panResponder = useRef(
       PanResponder.create({
         onMoveShouldSetPanResponder: () => true,
-        onPanResponderMove: Animated.event([null, {dx: pan.x, dy: pan.y}]),
+        onPanResponderMove: Animated.event(
+          [
+            null,
+            { dx: pan.x, dy: pan.y }
+          ],
+          {useNativeDriver: false}
+        ),
         onPanResponderRelease: (evt) => {
           const { pageX, pageY } = evt.nativeEvent;
           const y = (pageY / SCREEN_HEIGHT) * 100;

@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import { getData } from "./redux/secureStore";
 import { favoriteslist, fontsize } from "./redux/secureStore";
 import { Filter } from "./Search";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 // import { AppLoading } from "expo-app-loading";
 // import {
 //   useFonts,
@@ -75,26 +75,28 @@ class HomeScreen extends React.Component {
             backgroundColor: this.props.theme.homeHeaderBackground,
           }}
         >
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <View>
-              <Image
-                source={require("./Assets/download.png")}
-                style={styles.pic}
-              />
-            </View>
-            <View>
-              <Text
-                style={{
-                  ...styles.header1,
-                  fontWeight: "bold",
-                  color: "#e5e5e5",
-                }}
-              >
-                Methodist Church in Zimbabwe
-              </Text>
-              <Text style={{ ...styles.header2, color: "#e5e5e5" }}>
-                Ndebele Hymnal
-              </Text>
+          <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <View>
+                <Image
+                  source={require("./Assets/download.png")}
+                  style={styles.pic}
+                />
+              </View>
+              <View>
+                <Text
+                  style={{
+                    ...styles.header1,
+                    fontWeight: "bold",
+                    color: "#e5e5e5",
+                  }}
+                >
+                  Methodist Church in Zimbabwe
+                </Text>
+                <Text style={{ ...styles.header2, color: "#e5e5e5" }}>
+                  Ndebele Hymnal
+                </Text>
+              </View>
             </View>
           </View>
           <View
@@ -158,11 +160,11 @@ const styles = StyleSheet.create({
       paddingTop: 10,
     },
     header1: {
-      fontSize: 16,
+      fontSize: 15,
       marginTop: 17,
     },
     header2: {
-      fontSize: 15,
+      fontSize: 14,
       marginTop: 5,
     },
     searchBar: {
@@ -181,8 +183,8 @@ const styles = StyleSheet.create({
       height: 70,
     },
     pic: {
-      height: 65,
-      width: 65,
+      height: 64,
+      width: 64,
       marginTop: 0,
       marginBottom: -20,
     },

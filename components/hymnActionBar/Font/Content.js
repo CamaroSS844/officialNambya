@@ -7,7 +7,6 @@ import {
   ScrollView,
 } from "react-native";
 
-// import * as Sharing from "expo-sharing"
 import { connect } from "react-redux";
 import { setFontSize, onSliderChange } from "../../redux/fontSlice";
 import { setLineHeight } from "../../redux/linespaceSlice";

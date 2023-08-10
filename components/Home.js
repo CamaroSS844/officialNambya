@@ -1,7 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Entypo, FontAwesome } from "@expo/vector-icons";
+import { Entypo, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { store } from "./redux/store";
 import Favorites from "./favoritesScreen";
 import More from "./more";
@@ -68,6 +68,22 @@ export default function Hometab() {
                   name={focused ? "heart" : "heart-o"}
                   size={focused ? 28 : 23}
                   color={focused ? tabicon : "gray"}
+                />
+              );
+            },
+          })}
+        />
+        <Tab.Screen
+          name="Library"
+          component={Favorites}
+          options={({ route }) => ({
+            headerShown: true,
+            tabBarIcon: ({ focused }) => {
+              return (
+                <Ionicons
+                name={"library"}
+                size={focused ? 26 : 24}
+                color={focused ? tabicon : "gray"}
                 />
               );
             },
