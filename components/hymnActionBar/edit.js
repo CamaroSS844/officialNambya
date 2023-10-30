@@ -1,7 +1,9 @@
 import React from "react";
 import { TextInput, View, Text, StyleSheet, Pressable } from "react-native";
-import { FAB } from "@rneui/themed";
-import { FontAwesome, Ionicons } from "@expo/vector-icons";
+// import { FAB } from "@rneui/themed";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { FontAwesome } from "@expo/vector-icons";
 import { connect}from 'react-redux';
 import { back } from "../HymnScreen";
 //for upload icon
