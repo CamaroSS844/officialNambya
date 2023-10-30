@@ -15,7 +15,6 @@ import Content from "./Content";
 // import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const {height: SCREEN_HEIGHT} = Dimensions.get('window');
-// type BottomSheetComponentProps = {};
 const init = (SCREEN_HEIGHT / (1.8) ) / SCREEN_HEIGHT  * 100;
 
 
@@ -23,10 +22,6 @@ const init = (SCREEN_HEIGHT / (1.8) ) / SCREEN_HEIGHT  * 100;
 
     
     const dispatch = useDispatch()
-    // let  toggleBState = useSelector(state => state.toggleBS.value)
-    const bottomSheetModalRef = useRef(null);
-
-    const snapPoints = ["25%", "48%", "75%"];
 
     const pan = useRef(new Animated.ValueXY({x: 0, y: 800})).current;
     console.log(pan)
@@ -77,9 +72,6 @@ const init = (SCREEN_HEIGHT / (1.8) ) / SCREEN_HEIGHT  * 100;
             {...panResponder.panHandlers}>
                 <Content />
             </Animated.View>
-            {/* <BottomSheet modalProps={{}} isVisible={toggleBState}>
-                <Content />
-            </BottomSheet> */}
         </Pressable>
     )
     

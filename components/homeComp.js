@@ -94,7 +94,7 @@ class HomeScreen extends React.Component {
                   Methodist Church in Zimbabwe
                 </Text>
                 <Text style={{ ...styles.header2, color: "#e5e5e5" }}>
-                  Ndebele Hymnal
+                  Nambya Hymnal
                 </Text>
               </View>
             </View>
