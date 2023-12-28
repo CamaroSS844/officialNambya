@@ -8,6 +8,7 @@ import { store } from './components/redux/store';
 import  EditHymn  from './components/hymnActionBar/edit';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import PrayerScreen from './components/library/bhabhatiza';
 // Follow this pattern to import other Firebase services
 // import { } from 'firebase/<service>';
 
@@ -66,11 +67,16 @@ function MyNavigator(){
              component={HomeScreen}
              options={{headerShown: false}}
              />
+             <Stack.Screen
+             name='Minamato Woku Bhabhatiza Bana'
+             component={PrayerScreen}
+             options={{headerShown: false}}
+             />
             <Stack.Screen name='Hymn' component={HymnScreen} options={{
               headerShown: false, 
               gestureEnabled: true,
               unmountInactiveRoutes: true,
-              }} />
+            }} />
             <Stack.Screen name='Edit Hymn' component={EditHymn} options={{headerShown: false, gestureEnabled: true}} />
           </Stack.Navigator>
   )

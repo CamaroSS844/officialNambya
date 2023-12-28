@@ -7,6 +7,7 @@ import Favorites from "./favoritesScreen";
 import More from "./more";
 import { useSelector } from "react-redux";
 import HomeScreen from "./homeComp";
+import libraryScreen from "./library/libraryScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -75,7 +76,7 @@ export default function Hometab() {
         />
         <Tab.Screen
           name="Library"
-          component={Favorites}
+          component={libraryScreen}
           options={({ route }) => ({
             headerShown: true,
             tabBarIcon: ({ focused }) => {

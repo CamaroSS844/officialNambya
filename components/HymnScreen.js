@@ -21,9 +21,9 @@ Font.loadAsync({
   PlayfairDisplaySC_400Regular
 });
 
-const floatingcolor = 'red';
+export const floatingcolor = 'red';
 export const back = <FontAwesome name="chevron-left" size={25} color={floatingcolor} />;
-const keypad = <Ionicons name="keypad" size={23} color={"#fff"} />;
+export const keypad = <Ionicons name="keypad" size={23} color={"#fff"} />;
 
 function toggleHeartFunc(bool, color){
   if (bool)  return <FontAwesome name="heart-o" size={25} color={color} />;
@@ -100,7 +100,7 @@ export default function HymnScreen (props){
           , alignItems: "center", height: 90, maxWidth: "100%"
           }}>
           <View style={{display: "flex", flexDirection: "row"}}>
-            <Pressable style={{marginLeft: 0, marginRight: "5%"}} onPress={() => props.navigation.popToTop()}>
+            <Pressable style={{marginLeft: 15, marginRight: "5%"}} onPress={() => props.navigation.popToTop()}>
               {back}
             </Pressable>
             <Text style={{fontSize: 20, 
