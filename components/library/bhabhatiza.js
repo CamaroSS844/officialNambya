@@ -21,7 +21,7 @@ Font.loadAsync({
 });
 
 
-export default function bhabhatiza(props) {
+export default function PrayerScreen(props) {
     const id  = props.route.params.id;
     const dispatch = useDispatch();
     let size= useSelector(state =>  state.fontS.value);

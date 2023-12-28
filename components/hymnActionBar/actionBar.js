@@ -37,7 +37,9 @@ export default function ActionBar(props){
                 <Pressable style={{paddingLeft: 40}} onPress={handlePresentModal} >
                   {font}
                 </Pressable>
-                <Pressable style={{paddingBottom: 4 , paddingLeft: 40}}>
+                <Pressable style={{paddingBottom: 4 , paddingLeft: 40}}
+                onPress={() => props.navigation.push("Library")}
+                >
                   {library}
                 </Pressable>
             </View>
