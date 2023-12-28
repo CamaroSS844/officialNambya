@@ -29,15 +29,15 @@ export default function ActionBar(props){
         return (
             <View style={{...styles.bottomNav, 
                 backgroundColor: theme.tabBackgroundcolor}}>
-                <Pressable style={{paddingBottom: 3}} onPress={() => {
+                <Pressable style={{padding: 15}} onPress={() => {
                     props.navigation.push("Edit Hymn", { id: props.id, hymnName: props.hymnName, hymnContent: props.hymnContent })
                     }}>
                     {pen}
                 </Pressable>
-                <Pressable style={{paddingLeft: 40}} onPress={handlePresentModal} >
+                <Pressable style={{padding: 15,paddingLeft: 30}} onPress={handlePresentModal} >
                   {font}
                 </Pressable>
-                <Pressable style={{paddingBottom: 4 , paddingLeft: 40}}
+                <Pressable style={{padding: 15,paddingBottom: 15,paddingTop: 12, paddingLeft: 30}}
                 onPress={() => props.navigation.push("Library")}
                 >
                   {library}
