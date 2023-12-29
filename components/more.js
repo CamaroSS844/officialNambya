@@ -53,7 +53,7 @@ export class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.title = "Hey there";
-    this.message = "I am using the Methodist Church Ndebele Hymn Book";
+    this.message = "I am using the Methodist Church Nambya Hymn Book";
     this.url = "coming soon on google play";
     this.state = {
       color: null,
@@ -130,7 +130,6 @@ export class Menu extends React.Component {
               this.ThemePopUp();
               this.setState({ isActive: !this.state.isActive });
             }}
-            onToggleLongPress={() => console.log("toggle long pressed!")}
           />
         </View>
 

@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { StyleSheet } from "react-native";
 import { storeData, theme } from "./secureStore";
 
-let styles = {
+let object = {
     light: {
       backgroundColor: '#FEFEFE',
       color: 'black',
@@ -32,7 +31,7 @@ let styles = {
 
 const initialState = {
     //true means dark mode is on
-    value: styles.light
+    value: object.light
 }
  
 export const themeSlice = createSlice({
@@ -45,11 +44,11 @@ export const themeSlice = createSlice({
         toggleTheme: (state={}, action) => {
           //for general text and background
           //true means dark mode is on
-          if (action.payload === styles.light){
-            state.value = styles.dark
+          if (action.payload === object.light){
+            state.value = object.dark
             storeData(theme, state.value)
           }else {
-            state.value = styles.light
+            state.value = object.light
             storeData(theme, state.value)
            }
         }
@@ -58,7 +57,7 @@ export const themeSlice = createSlice({
 
 export const currentTheme = (themeColor) => {
   //we will use theme.color to establish if it is light or dark
-  if (themeColor == styles.light.color){
+  if (themeColor == object.light.color){
     return true
   } 
   return false
