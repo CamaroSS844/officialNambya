@@ -51,7 +51,7 @@ export default function PrayerScreen(props) {
             </Text>
           </View>
         </View>
-        <ScrollView style={styles.container}>
+        <ScrollView style={{...styles.container, backgroundColor: theme.backgroundColor}}>
             <Text style={{fontSize: size, color: theme.color, lineHeight: lineSpacing, fontFamily: fontFam}}>
             {libraryContent[id]}                                                                                         
             </Text>
@@ -64,7 +64,7 @@ export default function PrayerScreen(props) {
             title={keypad}
             color= {floatingcolor}
             placement="right"
-            style={{ margin: 30, marginRight: 10, borderColor: "#fff", 
+            style={{ margin: 30, marginRight: 10, borderColor: theme.backgroundColor , 
             borderWidth: 10, borderRadius: 40}}
             onPress={() => dispatch(setKeypadVisibility())}
         />
