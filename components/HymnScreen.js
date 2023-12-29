@@ -56,42 +56,6 @@ export default function HymnScreen (props){
     setToggleHeart(toggleHeartFunc(inFavorites, iconColor));
   }
 
-  //adding swipe gestures for navigation
-  const pan = useRef(new Animated.ValueXY({x: 0, y: 800})).current;
-  console.log(pan)
-
-  const panResponder = useRef(
-    PanResponder.create({
-      onMoveShouldSetPanResponder: () => true,
-      onPanResponderMove: Animated.event(
-        [
-          null,
-          { dx: pan.x, dy: pan.y }
-        ],
-        {useNativeDriver: false}
-      ),
-      onPanResponderRelease: (evt) => {
-        const { pageX, pageY } = evt.nativeEvent;
-        props.navigation.push("HymnScreen", {id: id + 1, hymnName: ContentData[id].name, toggleHeart: inFavorites})
-        // const y = (pageY / SCREEN_HEIGHT) * 100;
-        // if(y < init){
-        //   Animated.spring(pan, {
-        //     toValue: {x: 0, y: 2},
-        //     useNativeDriver: false,
-        //   }).start();
-        // }else{
-        //   Animated.timing(pan, {
-        //     toValue: {x: 0, y: 600},
-        //     duration: 600,
-        //     useNativeDriver: false
-        //   }).start();
-        //   setTimeout(() => {
-        //     dispatch(toggleBSState())
-        //   }, 500)
-        // }
-      },
-    }),
-  ).current;
 
   return (
       <View style={{flex: 1, backgroundColor: theme.backgroundColor}}>
@@ -113,7 +77,7 @@ export default function HymnScreen (props){
               <Pressable onPress={() => toggle(ContentData[id])}>
                 {toggleHeart}
               </Pressable>
-            <Text>8.6.8.6</Text>
+            <Text style={{color: theme.color}}>8.6.8.6</Text>
           </View>
         </View>
       <ScrollView>
@@ -137,7 +101,7 @@ export default function HymnScreen (props){
       title={keypad}
       color= {floatingcolor}
       placement="right"
-      style={{ margin: 30, marginRight: 10, borderColor: "#fff", 
+      style={{ margin: 30, marginRight: 10, borderColor: theme.backgroundColor, 
       borderWidth: 10, borderRadius: 40}}
       onPress={() => dispatch(setKeypadVisibility())}
     />
