@@ -21,7 +21,7 @@ class EditHymn extends React.Component{
 
     render(){
         return (
-            <View style={{flex: 1, display: "flex", backgroundColor: "#fff", width: "100%"}}>
+            <View style={{flex: 1, display: "flex", backgroundColor: this.props.theme.tabBackgroundcolor, width: "100%"}}>
             <View style={{
                 display: "flex", flexDirection: "row", justifyContent: "space-between"
                 , alignItems: "center", height: 65, maxWidth: "100%"

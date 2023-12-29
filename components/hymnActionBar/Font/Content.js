@@ -29,6 +29,7 @@ typefaceTextInactive = {color: "black"};
     constructor(props){
         super(props);
         this.toggle = this.props.toggle;
+        this.theme = this.props.theme;
         this.state = {
             //this.linespacing default or current value
             iconcolor: "grey",
@@ -114,12 +115,12 @@ typefaceTextInactive = {color: "black"};
 
     render(){
         return (
-                <View style={styles.Container} >
-                <Pressable style={{width: "100%"}} hitSlop={30}>
-                  <Pressable  style={styles.Line} hitSlop={30}/>
+                <View style={{...styles.Container, backgroundColor: this.props.theme.backgroundColor}} >
+                <Pressable style={{width: "100%", backgroundColor: this.theme.backgroundColor}} hitSlop={30}>
+                  <Pressable  style={{...styles.Line, backgroundColor: this.theme.color}} hitSlop={30}/>
                 </Pressable>
                 <View style={styles.divisons}>
-                    <Text style={styles.divHead} >Line Spacing</Text>
+                    <Text style={{...styles.divHead, color: this.theme.color}} >Line Spacing</Text>
                     <View style={styles.buttonContainer}>
                         <Pressable style={{...styles.button, ...styles.line}} 
                         onPress={() => this.props.setLineHeight(35)}>
@@ -135,10 +136,10 @@ typefaceTextInactive = {color: "black"};
                         </Pressable>
                     </View>
                 </View>
-                <View style={{...styles.divisons, paddingBottom: 20}}>
-                    <Text style={styles.divHead}>Text Size</Text>
+                <View style={{...styles.divisons, paddingBottom: 20, backgroundColor: this.theme.backgroundColor}}>
+                    <Text style={{...styles.divHead, color: this.theme.color}}>Text Size</Text>
                     <View style={{display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center"}}>
-                        <Text style={{fontSize: 15}}>Aa</Text>
+                        <Text style={{fontSize: 15, color: this.theme.color}}>Aa</Text>
                         <Slider
                             style={{width: 250, height: 40}}
                             minimumValue={15}
@@ -147,14 +148,14 @@ typefaceTextInactive = {color: "black"};
                             onValueChange = {e => this.props.onSliderChange(e)}
                             onSlidingComplete = {() => this.props.setFontSize()}
                             minimumTrackTintColor="red"
-                            maximumTrackTintColor="#000000"
+                            maximumTrackTintColor={this.theme.color}
                         />
-                        <Text style={{fontSize: 28}}>Aa</Text>
+                        <Text style={{fontSize: 28, color: this.theme.color}}>Aa</Text>
                     </View>
                 </View>
-                <View style={styles.divisons}>
-                    <Text style={styles.divHead}>Typeface</Text>
-                    <ScrollView horizontal={true}>
+                <View style={{...styles.divisons, paddingBottom: 80,backgroundColor: this.theme.backgroundColor}}>
+                    <Text style={{...styles.divHead, color: this.theme.color}}>Typeface</Text>
+                    <ScrollView horizontal={true} style={{backgroundColor: this.theme.backgroundColor}}>
                         <Pressable onPress={() => this.typeFaceButtonHandler('Inter', inter)} style={{...styles.button, ...this.state.interButtonBackground}}>
                             <Text style={{...this.state.interTextColor}}>Inter</Text>
                         </Pressable>
@@ -194,7 +195,6 @@ const mapStateToProps = (state) => ({
 
   const styles = StyleSheet.create({
     Container: {
-        backgroundColor: "#fff", 
         padding: 30, 
         paddingLeft: 20, 
         paddingRight: 10,
@@ -229,12 +229,10 @@ const mapStateToProps = (state) => ({
     },
     Line : {
         alignSelf: "center",
-        borderColor: "grey",
         borderRadius: 5, 
         marginTop: 0,
         width: 55,
         height: 5,
-        backgroundColor: "#5e5e5e"
     },
 })
   
